@@ -1,0 +1,27 @@
+version: '3'
+services: # containers # list the containers we want to create
+   mongodb:  # mongodb container
+      image: mongo
+      ports:
+         - 27017:27017
+   tweet_coll:
+      build: Tweets/
+      volumes:
+         - ./Tweets/:/app
+      depends_on:
+         - mongodb
+      env_file:
+         - twitter_keys.env
+   postgresdb:
+      image: postgres
+      ports:
+         - 5555:5432
+      env_file:
+         - post_cred.env
+   etl:
+      build: ETL_tweet/ #name of the folder of etl
+      depends_on:
+         - mongodb
+         - postgresdb
+      env_file:
+         - post_cred.env

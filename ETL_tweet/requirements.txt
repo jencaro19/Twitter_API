@@ -1,0 +1,6 @@
+#add all the packages
+pymongo
+sqlalchemy
+psycopg2-binary
+pandas
+vaderSentiment
